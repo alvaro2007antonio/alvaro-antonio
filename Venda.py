@@ -1,4 +1,5 @@
 import json
+import Produto
 
 class Venda:
     def __init__(self, dataVenda):
@@ -45,3 +46,10 @@ class Venda:
         dados_em_json = json.dumps(objetos_dict)
         with open(arquivo, 'w') as arquivo:
             arquivo.write(dados_em_json)
+
+    def recuperarDeJson(self, arquivo):
+        with open(arquivo, "r", encoding="utf-8") as f:
+            dados_em_dicionario = json.load(f)
+        for dados in dados_em_dicionario:
+            objeto = Produto.from_dict(dados)
+            self.adicionarProduto(objeto)
